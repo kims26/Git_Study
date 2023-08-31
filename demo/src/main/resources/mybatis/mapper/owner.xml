@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo_final.dao.OwnerDao">
+
+<select id="selectList" resultType="OwnerVo">
+    select * from owner order by o_idx
+</select>
+
+<select id="selectOne" resultType="ProductVo">
+    select * from product order by p_idx
+</select>
+
+
+<select id="selectOneFromIdx" parameterType="int" resultType="OwnerVo">
+    select * from owner where o_idx=#{ o_idx }
+</select>
+
+<select id="selectOneIdx" parameterType="int" resultType="ProductVo">
+    select * from product where p_idx=#{ p_idx }
+</select>
+
+
+
+
+
+
+<select id="selectOneFromId" parameterType="String" resultType="OwnerVo">
+    select * from owner where o_id=#{o_id}
+</select>
+
+
+
+<insert id="insert" parameterType="OwnerVo">
+    insert into owner values(seq_owner_o_idx.nextVal,
+                                #{ o_name },
+  	                            #{ o_addr },
+                                #{ o_tel },
+  	                            #{ o_id },
+  	                            #{ o_pwd }
+                                )
+</insert>
+
+<update id="update" parameterType="OwnerVo">
+    update owner set o_name=#{ o_name },
+  	                   o_pwd=#{ o_pwd },
+                       o_addr=#{ o_addr }
+	 where o_idx=#{ o_idx }
+</update>
+
+<delete id="delete" parameterType="int">
+    delete from owner where o_idx=#{ o_idx }
+</delete>
+
+
+</mapper>
